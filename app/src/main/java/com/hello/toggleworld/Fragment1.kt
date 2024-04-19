@@ -11,4 +11,5 @@ class Fragment1 : Fragment() {
         val view = inflater.inflate(R.layout.frag1, container, false)
         return view
     }
+
 }

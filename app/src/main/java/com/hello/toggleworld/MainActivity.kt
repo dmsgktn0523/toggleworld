@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
             setFrag(1)
         }
 
-//        setFrag(0)
+        setFrag(0)
     }
 
     private fun setFrag(fragNum : Int) {
