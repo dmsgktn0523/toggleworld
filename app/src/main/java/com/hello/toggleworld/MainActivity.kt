@@ -1,28 +1,17 @@
 package com.hello.toggleworld
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.hello.toggleworld.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val binding: ActivityMainBinding
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        enableEdgeToEdge()
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
 
         binding.btnFragment1.setOnClickListener {
             setFrag(0)
@@ -31,18 +20,24 @@ class MainActivity : AppCompatActivity() {
             setFrag(1)
         }
 
+        binding.btnBottomFragment3.setOnClickListener {
+            setFrag(2)
+        }
+
         setFrag(0)
     }
 
-    private fun setFrag(fragNum : Int) {
+    private fun setFrag(fragNum: Int) {
         val ft = supportFragmentManager.beginTransaction()
-        when(fragNum)
-        {
+        when (fragNum) {
             0 -> {
-                ft.replace(R.id.main_frame,Fragment1()).commit()
+                ft.replace(R.id.main_frame, Fragment1()).commit()
             }
             1 -> {
-                ft.replace(R.id.main_frame,Fragment2()).commit()
+                ft.replace(R.id.main_frame, Fragment2()).commit()
+            }
+            2 ->{
+                ft.replace(R.id.main_frame, Frag1AddingWord()).commit()
             }
         }
     }
@@ -55,4 +50,8 @@ class MainActivity : AppCompatActivity() {
             super.onBackPressed()
         }
     }
+
+
+
+
 }
