@@ -7,11 +7,16 @@ import com.hello.toggleworld.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         val binding: ActivityMainBinding
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+
 
         binding.btnFragment1.setOnClickListener {
             setFrag(0)
@@ -20,12 +25,15 @@ class MainActivity : AppCompatActivity() {
             setFrag(1)
         }
 
-        binding.btnBottomFragment3.setOnClickListener {
-            setFrag(2)
-        }
+//        binding.btnBottomFragment3.setOnClickListener {
+//            setFrag(2)
+//        }
 
         setFrag(0)
+
+
     }
+
 
     private fun setFrag(fragNum: Int) {
         val ft = supportFragmentManager.beginTransaction()
