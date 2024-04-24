@@ -1,11 +1,13 @@
 package com.hello.toggleworld
 
+import android.graphics.Typeface
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.hello.toggleworld.databinding.ActivityMainBinding
+import com.hello.toggleworld.databinding.Frag1QuickAddBinding
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), Frag1QuickAdd.OnReturnButtonClickListener, Frag1DetailAdd.OnReturnButtonClickListener, Frag1AutoAdd.OnReturnButtonClickListener {
 
 
 
@@ -14,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        //bindingFrag1QuickAdd = Frag1QuickAddBinding.inflate(inflater, container, false)
 
 
 
@@ -25,6 +27,11 @@ class MainActivity : AppCompatActivity() {
             setFrag(1)
         }
 
+        //bindingFrag1QuickAdd.btnReturn.setOnClickListener {
+        //    setFrag(0)
+        //}
+
+
 //        binding.btnBottomFragment3.setOnClickListener {
 //            setFrag(2)
 //        }
@@ -33,7 +40,9 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-
+    override fun onReturnButtonClick() {
+        setFrag(0)
+    }
 
     private fun setFrag(fragNum: Int) {
         val ft = supportFragmentManager.beginTransaction()

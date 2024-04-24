@@ -82,21 +82,22 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_auto_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="36dp"
         android:text="단어 추가"
-        app:layout_constraintStart_toEndOf="@+id/button"
+        app:layout_constraintStart_toEndOf="@+id/btn_detail_return"
         app:layout_constraintTop_toBottomOf="@+id/editTextText3" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_detail_return"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="92dp"
         android:layout_marginTop="36dp"
+        android:backgroundTint="#8E8E8E"
         android:text="돌아가기"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextText3" />

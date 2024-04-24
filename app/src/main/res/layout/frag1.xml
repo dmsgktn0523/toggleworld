@@ -27,7 +27,7 @@
     <!--        height 표시하는 더 좋은 방법 필요!!! -->
     <FrameLayout
         android:layout_width="wrap_content"
-        android:layout_height="560dp">
+        android:layout_height="540dp">
 
 
         <ListView
@@ -52,6 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
             android:layout_weight="1"
+            android:backgroundTint="#8E8E8E"
             android:text="정렬" />
 
         <Button
@@ -60,6 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
             android:layout_weight="1"
+            android:backgroundTint="#8E8E8E"
             android:text="설정" />
 
         <Button
@@ -76,6 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
             android:layout_weight="1"
+            android:backgroundTint="#8E8E8E"
             android:text="편집" />
 
     </LinearLayout>
