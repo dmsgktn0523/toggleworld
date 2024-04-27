@@ -70,5 +70,4 @@ class MainActivity : AppCompatActivity(), Frag1QuickAdd.OnReturnButtonClickListe
 
 
 
-
 }

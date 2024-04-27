@@ -50,7 +50,27 @@ class Frag1QuickAdd : Fragment() {
                 Snackbar.make(view, "Please enter a word", Snackbar.LENGTH_SHORT).show()
             }
         }
+
+
+//        binding.btnAdd.setOnClickListener {
+//            //단어를 추가하면, frag1의 words_list에 그 단어가 저장
+//
+//            val word = binding.textWordSpellingInput.text.toString()
+//            val meaning = binding.textWordMeanInput.text.toString()
+//
+//            // 2. Frag1의 words_list에 단어와 뜻 추가하기
+//            (activity as? Fragment1)?.addWordToList(word, meaning)
+//
+//        }
+
+
     }
+
+
+
+
+
+
 
     private fun translateWord(word: String) {
         GlobalScope.launch(Dispatchers.IO) {
