@@ -49,9 +49,12 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(fileTree("libs") {
         include("*.jar")
-    })
+    }
+    )
     implementation("org.jsoup:jsoup:1.14.3")
 
     implementation("androidx.recyclerview:recyclerview:1.3.2")
+
+
 
 }

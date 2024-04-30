@@ -1,12 +1,13 @@
 package com.hello.toggleworld
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hello.toggleworld.databinding.WordsRecyclerViewBinding
+import android.util.Log
 
-class CustomAdapter(val savedWordsList : ArrayList<savedWords>) : RecyclerView.Adapter<CustomAdapter.Holder>() {
+
+class CustomAdapter(val savedWordsList : ArrayList<SavedWords2>) : RecyclerView.Adapter<CustomAdapter.Holder>() {
     override fun getItemCount(): Int {
         return savedWordsList.size
     }
@@ -26,6 +27,13 @@ class CustomAdapter(val savedWordsList : ArrayList<savedWords>) : RecyclerView.A
         val word = binding.textWord
         val meaning = binding.textMeaning
         val sentence = binding.textSentence
+    }
+
+    fun addWord(savedWords2: SavedWords2) {
+        savedWordsList.add(savedWords2)
+        Log.d("CustomAdapter", "Added word: ${savedWords2.word}")
+        notifyDataSetChanged()
+
     }
 }
 

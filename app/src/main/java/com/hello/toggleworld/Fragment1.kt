@@ -4,16 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ListView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.hello.toggleworld.databinding.Frag1Binding
-import com.hello.toggleworld.databinding.WordsRecyclerViewBinding
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.hello.toggleworld.SavedWords2
+import android.util.Log
 
 
-class Fragment1 : Fragment() {
+class Fragment1 : Fragment(), Frag1QuickAdd.OnWordAddedListener {
     private lateinit var binding: Frag1Binding
+    private val savedWordsList = ArrayList<SavedWords2>() // Declare savedWordsList
+    private lateinit var customAdapter: CustomAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = Frag1Binding.inflate(inflater, container, false)
@@ -27,13 +29,12 @@ class Fragment1 : Fragment() {
         }
 
         // savedWordsList 생성
-        val savedWordsList = ArrayList<savedWords>()
-        savedWordsList.add(savedWords("apple", "사과", "Apple and banana"))
-        savedWordsList.add(savedWords("clutter-free", "어수선한 것이 없는", ""))
-        savedWordsList.add(savedWords("deployment", "전개, 배치", "the goverment's troop deployment is set against to Iraq"))
+        savedWordsList.add(SavedWords2("apple", "사과", "Apple and banana"))
+//        savedWordsList.add(SavedWords2("clutter-free", "어수선한 것이 없는", ""))
+//        savedWordsList.add(SavedWords2("deployment", "전개, 배치", "the goverment's troop deployment is set against to Iraq"))
 
         // CustomAdapter 설정
-        val customAdapter = CustomAdapter(savedWordsList)
+        customAdapter = CustomAdapter(savedWordsList)
         binding.wordsRecyclerView.adapter = customAdapter
 
 
@@ -41,6 +42,15 @@ class Fragment1 : Fragment() {
         val layoutManager = LinearLayoutManager(requireContext())
         binding.wordsRecyclerView.layoutManager = layoutManager
 
+        val frag1QuickAdd = Frag1QuickAdd()
+        frag1QuickAdd.setOnWordAddedListener((this))
+
+    }
+    override fun onWordAdded(savedWords2: SavedWords2) {
+        // 추가된 단어를 Fragment1의 savedWordsList에 추가
+        savedWordsList.add(savedWords2)
+        customAdapter.addWord(savedWords2)
+        Log.d("Fragment1", "onWordAdded: $savedWords2")
     }
 
     private fun replaceFragment(fragment: Fragment) {

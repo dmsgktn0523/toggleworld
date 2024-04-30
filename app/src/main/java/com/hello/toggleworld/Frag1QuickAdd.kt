@@ -1,30 +1,31 @@
 package com.hello.toggleworld
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.hello.toggleworld.databinding.Frag1QuickAddBinding
+import com.hello.toggleworld.SavedWords2
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.jsoup.Jsoup
 import java.io.IOException
+import android.util.Log
+
+
+
 
 class Frag1QuickAdd : Fragment() {
     private lateinit var binding: Frag1QuickAddBinding
+//    private val savedWordsList = ArrayList<SavedWords>()
+    private var onWordAddedListener : OnWordAddedListener? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = Frag1QuickAddBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -32,6 +33,7 @@ class Frag1QuickAdd : Fragment() {
     interface OnReturnButtonClickListener {
         fun onReturnButtonClick()
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,24 +53,34 @@ class Frag1QuickAdd : Fragment() {
             }
         }
 
+        binding.btnAdd.setOnClickListener {
+            //단어를 추가하면, frag1의 savedWordsList에 그 단어가 저장
 
-//        binding.btnAdd.setOnClickListener {
-//            //단어를 추가하면, frag1의 words_list에 그 단어가 저장
-//
-//            val word = binding.textWordSpellingInput.text.toString()
-//            val meaning = binding.textWordMeanInput.text.toString()
-//
-//            // 2. Frag1의 words_list에 단어와 뜻 추가하기
-//            (activity as? Fragment1)?.addWordToList(word, meaning)
-//
-//        }
+            val word = binding.textWordSpellingInput.text.toString()
+            val meaning = binding.textWordMeanInput.text.toString()
+//            val sentence = binding.textWordMeanInput.text.toString()
 
+//            Log.d("Frag1QuickAdd", "Word: $word, Meaning: $meaning")
+
+            val savedWords2 = SavedWords2(word, meaning, "")
+            onWordAddedListener?.onWordAdded(savedWords2)
+
+            binding.textWordSpellingInput.text.clear()
+            binding.textWordMeanInput.text.clear()
+
+
+        }
 
     }
 
+    fun setOnWordAddedListener(listener: OnWordAddedListener) {
+        this.onWordAddedListener = listener
+    }
 
 
-
+    interface OnWordAddedListener {
+        fun onWordAdded(savedWords2: SavedWords2)
+    }
 
 
 
