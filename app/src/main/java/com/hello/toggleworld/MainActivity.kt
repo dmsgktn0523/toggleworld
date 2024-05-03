@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity(), Frag1QuickAdd.OnReturnButtonClickListe
                 ft.replace(R.id.main_frame, Fragment2()).commit()
             }
             2 ->{
-                ft.replace(R.id.main_frame, Frag1AddingWord()).commit()
+                ft.replace(R.id.main_frame, QuickAdd()).commit()
             }
         }
     }

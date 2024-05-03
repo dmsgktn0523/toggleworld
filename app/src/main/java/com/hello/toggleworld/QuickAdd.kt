@@ -1,13 +1,16 @@
 package com.hello.toggleworld
 
 import android.os.Bundle
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.text.Editable
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.hello.toggleworld.databinding.Frag1QuickAddBinding
+import com.hello.toggleworld.databinding.Frag2Binding
+import com.hello.toggleworld.databinding.QuickAddBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -15,30 +18,25 @@ import kotlinx.coroutines.withContext
 import org.jsoup.Jsoup
 import java.io.IOException
 
-class Frag1QuickAdd : Fragment() {
-    private lateinit var binding: Frag1QuickAddBinding
-    private var onWordAddedListener: OnWordAddedListener? = null
+class QuickAdd : Fragment() {
+    lateinit var binding: QuickAddBinding
+
+    private lateinit var customAdapter: CustomAdapter
 
     interface OnWordAddedListener {
         fun onWordAdded(word: String, meaning: String, sentence: String)
     }
-
-
-    interface OnReturnButtonClickListener {
-        fun onReturnButtonClick()
-    }
-
+    private var onWordAddedListener: OnWordAddedListener? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = Frag1QuickAddBinding.inflate(inflater, container, false)
+        binding = QuickAddBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnQuickReturn.setOnClickListener {
-            (activity as? OnReturnButtonClickListener)?.onReturnButtonClick()
-        }
+        customAdapter = CustomAdapter(ArrayList())
+
 
         binding.imgSearch.setOnClickListener {
             val word = binding.textWordSpellingInput.text.toString()
@@ -52,7 +50,7 @@ class Frag1QuickAdd : Fragment() {
         binding.btnAdd.setOnClickListener {
             val word = binding.textWordSpellingInput.text.toString()
             val meaning = binding.textWordMeanInput.text.toString()
-            val sentence = binding.textWordMeanInput.text.toString()  // Seems incorrect; probably a copy-paste error?
+            val sentence = ""
             if (word.isEmpty()) {
                 Snackbar.make(view, "단어를 입력해주세요", Snackbar.LENGTH_SHORT).show()
             } else {
@@ -61,6 +59,12 @@ class Frag1QuickAdd : Fragment() {
                 binding.textWordMeanInput.text.clear()
             }
         }
+
+        binding.btnQuickReturn.setOnClickListener {
+            // Frag1로 이동하는 코드 추가
+            fragmentManager?.popBackStack()
+        }
+
     }
 
     fun setOnWordAddedListener(listener: OnWordAddedListener) {
@@ -83,6 +87,11 @@ class Frag1QuickAdd : Fragment() {
                 }
             }
         }
+    }
+
+    fun addWord(word: String, meaning: String) {
+        val savedWords2 = SavedWords2(word, meaning, "")
+        customAdapter.addWord(savedWords2)
     }
 
     fun String.toEditable(): Editable = Editable.Factory.getInstance().newEditable(this)

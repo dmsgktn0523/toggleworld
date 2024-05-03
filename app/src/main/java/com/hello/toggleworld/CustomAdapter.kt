@@ -7,26 +7,26 @@ import com.hello.toggleworld.databinding.WordsRecyclerViewBinding
 import android.util.Log
 
 
-class CustomAdapter(val savedWordsList : ArrayList<SavedWords2>) : RecyclerView.Adapter<CustomAdapter.Holder>() {
-    override fun getItemCount(): Int {
-        return savedWordsList.size
-    }
+class CustomAdapter(private val savedWordsList : ArrayList<SavedWords2>) : RecyclerView.Adapter<CustomAdapter.Holder>() {
+    override fun getItemCount(): Int = savedWordsList.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomAdapter.Holder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding = WordsRecyclerViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return Holder(binding)
     }
 
-    override fun onBindViewHolder(holder: CustomAdapter.Holder, position: Int) {
-        holder.word.text = savedWordsList[position].word
-        holder.meaning.text = savedWordsList[position].meaning
-        holder.sentence.text = savedWordsList[position].sentence
+    override fun onBindViewHolder(holder: Holder, position: Int) {
+        holder.bind(savedWordsList[position])
     }
 
-    inner class Holder(val binding: WordsRecyclerViewBinding) : RecyclerView.ViewHolder(binding.root) {
-        val word = binding.textWord
-        val meaning = binding.textMeaning
-        val sentence = binding.textSentence
+    class Holder(private val binding: WordsRecyclerViewBinding) : RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(savedWords2: SavedWords2){
+            binding.textWord.text = savedWords2.word
+            binding.textMeaning.text = savedWords2.meaning
+            binding.textSentence.text = savedWords2.sentence
+
+        }
     }
 
     fun addWord(savedWords2: SavedWords2) {
