@@ -31,8 +31,7 @@ class Fragment1 : Fragment(), QuickAdd.OnWordAddedListener {
 
 
 //        savedWordsList.add(SavedWords2("clutter-free", "어수선한 것이 없는", ""))
-        customAdapter = CustomAdapter(savedWordsList)
-        binding.wordsRecyclerView.adapter = customAdapter
+
 
         // LinearLayoutManager 설정
         val layoutManager = LinearLayoutManager(requireContext())
@@ -85,10 +84,13 @@ class Fragment1 : Fragment(), QuickAdd.OnWordAddedListener {
 
     }
 
+
+
     override fun onWordAdded(word: String, meaning: String, sentence: String) {
         // 단어와 뜻을 받아 처리하는 로직 구현
         savedWordsList.add(SavedWords2(word, meaning, sentence))
         customAdapter.notifyDataSetChanged()
+
     }
 
 

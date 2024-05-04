@@ -15,7 +15,7 @@
             android:id="@+id/btn_to_folder_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_margin="10dp"
             android:text="◀ 폴더목록"
             android:textColorHighlight="#FFEB3B"
             android:textColorHint="#FFEB3B"
@@ -27,15 +27,14 @@
     <!--        height 표시하는 더 좋은 방법 필요!!! -->
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="520dp">
+        android:layout_height="600dp"
+        >
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/words_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp"
             android:background="@color/white" />
 
     </FrameLayout>

@@ -25,6 +25,7 @@ class QuickAdd : Fragment() {
 
     interface OnWordAddedListener {
         fun onWordAdded(word: String, meaning: String, sentence: String)
+
     }
     private var onWordAddedListener: OnWordAddedListener? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -71,6 +72,10 @@ class QuickAdd : Fragment() {
         this.onWordAddedListener = listener
     }
 
+
+
+    //-------------------Translation Function---------------------
+
     private fun translateWord(word: String) {
         GlobalScope.launch(Dispatchers.IO) {
             try {
@@ -88,6 +93,8 @@ class QuickAdd : Fragment() {
             }
         }
     }
+
+    //---------------------------------------------------------
 
     fun addWord(word: String, meaning: String) {
         val savedWords2 = SavedWords2(word, meaning, "")
